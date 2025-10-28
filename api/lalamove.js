@@ -107,3 +107,24 @@ module.exports = async (req, res) => {
 //     });
 //   }
 // };
+
+// // corpo da requisição para produção
+// # Teste o mock
+// curl -X POST https://high-api.vercel.app/api/lalamove \
+//   -H "Content-Type: application/json" \
+//   -d '{
+//     "path": "/v3/quotations",
+//     "headers": {
+//       "Authorization": "hmac pk_test_405b82b18afd1a3b961cb61c82e063cf:123456789:test",
+//       "Market": "HK"
+//     },
+//     "body": {
+//       "data": {
+//         "serviceType": "MOTORCYCLE",
+//         "stops": [
+//           {"coordinates": {"lat": "22.3354735", "lng": "114.1761581"}},
+//           {"coordinates": {"lat": "22.2955316", "lng": "114.1688517"}}
+//         ]
+//       }
+//     }
+//   }'
