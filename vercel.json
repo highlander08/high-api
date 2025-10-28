@@ -2,17 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/*.js",
+      "src": "api/lalamove.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/test.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "/api/lalamove",
+      "dest": "/api/lalamove.js"
     },
     {
-      "src": "/(.*)",
+      "src": "/api/test",
+      "dest": "/api/test.js"
+    },
+    {
+      "src": "/",
       "dest": "/api/test.js"
     }
   ]

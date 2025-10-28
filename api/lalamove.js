@@ -1,17 +1,16 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-  // CORS headers
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
   
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
 
-  console.log('🚀 Lalamove Proxy - Received request');
+  console.log('🚀 Lalamove Proxy - Request received');
   
   try {
     const { path, headers, body } = req.body;
@@ -30,8 +29,8 @@ module.exports = async (req, res) => {
       url: `https://sandbox-rest.lalamove.com${path}`,
       data: body,
       headers: {
-        'Authorization': headers.Authorization,
-        'Market': headers.Market,
+        'Authorization': headers?.Authorization,
+        'Market': headers?.Market,
         'Content-Type': 'application/json',
         'Host': 'sandbox-rest.lalamove.com'
       },
@@ -39,12 +38,12 @@ module.exports = async (req, res) => {
     });
 
     console.log('✅ Lalamove response:', response.status);
-    res.status(response.status).json(response.data);
+    return res.status(response.status).json(response.data);
     
   } catch (error) {
     console.error('❌ Proxy error:', error.message);
     
-    res.status(error.response?.status || 500).json({
+    return res.status(error.response?.status || 500).json({
       error: 'Proxy error',
       message: error.message,
       details: error.response?.data
