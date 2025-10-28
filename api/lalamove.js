@@ -67,3 +67,43 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+// // production quando lalamove estiver acessível
+// // api/lalamove.js (PARA PRODUÇÃO - quando a Lalamove resolver)
+// const axios = require('axios');
+
+// module.exports = async (req, res) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', '*');
+  
+//   if (req.method === 'OPTIONS') return res.status(200).end();
+
+//   try {
+//     const { path, headers, body } = req.body;
+    
+//     if (!path) {
+//       return res.status(400).json({ error: 'Missing path' });
+//     }
+
+//     const response = await axios({
+//       method: 'POST',
+//       url: `https://sandbox-rest.lalamove.com${path}`,
+//       data: body,
+//       headers: {
+//         'Authorization': headers.Authorization,
+//         'Market': headers.Market,
+//         'Content-Type': 'application/json'
+//       },
+//       timeout: 30000
+//     });
+
+//     res.status(response.status).json(response.data);
+    
+//   } catch (error) {
+//     res.status(500).json({
+//       error: 'Lalamove API error',
+//       message: error.message
+//     });
+//   }
+// };
